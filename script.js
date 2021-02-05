@@ -38,12 +38,13 @@ quoteInputElement.addEventListener('input', () => {
     final=correcter/(incorrect+correcter);
     console.log();
     results.push(final);
-    timing.push(timer);
+    
     correcter=0;  incorrect=0;
     var x= Math.max(...results)
     x=x*100;
-    var x1= Math.min(...timerElement)
-    document.getElementById("max_time").innerHTML =`Best Accuracy ${x}% and Best Timing is ${x1} `;
+    var timings1 = Math.min(...timing)
+    x=Math.floor(x)
+    document.getElementById("max_time").innerHTML =`Best Accuracy ${x}% and least timing is ${timings1}s  `;
   }
 })
 
@@ -65,13 +66,23 @@ async function renderNewQuote() {
   startTimer()
 }
 
-let startTime
+let startTime = " "
+let endTime = " "
 function startTimer() {
   timerElement.innerText = 0
+  
   startTime = new Date()
   setInterval(() => {
     timer.innerText = getTimerTime()
   }, 1000)
+  var diift= startTime.getSeconds()-endTime
+  if(endTime!=" ")
+  endTime=startTime.getSeconds()
+  timing.push(diift)
+
+
+
+  
 }
 
 function getTimerTime() {
